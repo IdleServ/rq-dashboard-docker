@@ -12,7 +12,7 @@ version=`cat VERSION`
 echo "Version: $version"
 
 # Build image
-docker buildx build --platform linux/amd64 --push -t $USERNAME/$IMAGE:latest .
+docker buildx build --platform linux/amd64 --push -t $USERNAME/$IMAGE:latest -t $USERNAME/$IMAGE:$version .
 
 # Tag it
 git add -A
@@ -20,7 +20,7 @@ git commit -m "Version $version"
 git tag -a "$version" -m "Version $version"
 git push
 git push --tags
-docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version
+# docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version
 
 # Push to Docker Hub
 # docker push $USERNAME/$IMAGE:latest
